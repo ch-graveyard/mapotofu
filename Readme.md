@@ -6,4 +6,4 @@ well-written code base.
 
 ## Target platforms
 
-I will begin with making this work for Android, and hopefully later expanding to iOS or maybe even Facebook Gameroom if time permits.
+I will begin with making this work for Android, and hopefully later expanding to iOS if time permits.
