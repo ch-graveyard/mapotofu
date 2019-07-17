@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: e49a3eba1d0490b4488ad81176ec85d7
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Infini
+  fontNames:
+  - Infini
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 316e5f766e775f1449131bbcca9e94fb, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
