@@ -337,6 +337,52 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 196300358}
+--- !u!1 &322434796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 322434797}
+  - component: {fileID: 322434798}
+  m_Layer: 0
+  m_Name: GameMaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &322434797
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 322434796}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &322434798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 322434796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264de4e13ae2b054884fe9d2b4ec8f01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hpBar: {fileID: 607179373}
+  _maxHp: 13759
+  _waterBar: {fileID: 331575824}
+  _maxWater: 10
+  _tofuBar: {fileID: 1864037253}
+  _maxTofu: 33124
 --- !u!1001 &331575822
 Prefab:
   m_ObjectHideFlags: 0
@@ -518,7 +564,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -934,7 +980,6 @@ GameObject:
   - component: {fileID: 659740344}
   - component: {fileID: 659740346}
   - component: {fileID: 659740345}
-  - component: {fileID: 659740347}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -993,19 +1038,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 659740343}
---- !u!114 &659740347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 659740343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03c7decd05b17af448cd20186f6b4b79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  barHandler: {fileID: 331575824}
-  delta: -1
 --- !u!1001 &802462770
 Prefab:
   m_ObjectHideFlags: 0
@@ -1176,7 +1208,6 @@ GameObject:
   - component: {fileID: 1179260145}
   - component: {fileID: 1179260144}
   - component: {fileID: 1179260143}
-  - component: {fileID: 1179260146}
   m_Layer: 0
   m_Name: EatButton
   m_TagString: Untagged
@@ -1242,8 +1273,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1179260146}
-        m_MethodName: OnButtonClicked
+      - m_Target: {fileID: 322434798}
+        m_MethodName: EatButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1288,19 +1319,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1179260141}
---- !u!114 &1179260146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1179260141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03c7decd05b17af448cd20186f6b4b79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  barHandler: {fileID: 607179373}
-  delta: -500
 --- !u!1 &1547979773
 GameObject:
   m_ObjectHideFlags: 0
@@ -1380,7 +1398,6 @@ GameObject:
   - component: {fileID: 1633846611}
   - component: {fileID: 1633846610}
   - component: {fileID: 1633846609}
-  - component: {fileID: 1633846608}
   m_Layer: 0
   m_Name: DrinkButton
   m_TagString: Untagged
@@ -1407,19 +1424,6 @@ RectTransform:
   m_AnchoredPosition: {x: 200, y: 199.99998}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1633846608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1633846606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03c7decd05b17af448cd20186f6b4b79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  barHandler: {fileID: 607179373}
-  delta: 1000
 --- !u!114 &1633846609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1459,19 +1463,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1633846608}
-        m_MethodName: OnButtonClicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 659740347}
-        m_MethodName: OnButtonClicked
+      - m_Target: {fileID: 322434798}
+        m_MethodName: DrinkButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1516,6 +1509,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1633846606}
+--- !u!114 &1864037253 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114844553800948848, guid: e26e345ca27778349ad02b46e644ec0b,
+    type: 2}
+  m_PrefabInternal: {fileID: 802462770}
+  m_Script: {fileID: 11500000, guid: 99553b9f3ea1d0a4b9677eae3df4cfa3, type: 3}
 --- !u!1 &1975113930
 GameObject:
   m_ObjectHideFlags: 0

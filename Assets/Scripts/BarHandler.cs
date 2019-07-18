@@ -6,22 +6,6 @@ namespace CH.MapoTofu.UI
 
     public class BarHandler : MonoBehaviour
     {
-        #region Serialized fields
-        [SerializeField]
-        private int _maxValue = 10000;
-
-        /// <summary>
-        /// Maximum value the progress bar can have.
-        /// </summary>
-        public int MaxValue
-        {
-            get
-            {
-                return _maxValue;
-            }
-        }
-        #endregion
-
         #region UI elements
         /// <summary>
         /// Image object that represents the fill of the bar.
@@ -34,11 +18,11 @@ namespace CH.MapoTofu.UI
         private Text _valueText;
         #endregion
 
+        private int _value;
+
         /// <summary>
         /// Current value of the property.
         /// </summary>
-        private int _value;
-
         public int Value
         {
             get
@@ -47,12 +31,28 @@ namespace CH.MapoTofu.UI
             }
         }
 
-        void Awake()
+        private int _maxValue = 0;
+
+        /// <summary>
+        /// Maximum possible value of the property.
+        /// </summary>
+        public int MaxValue
+        {
+            get
+            {
+                return _maxValue;
+            }
+        }
+
+        void Start()
         {
             // get UI elements
             _fill = transform.Find("Fill").GetComponent<Image>();
             _valueText = transform.Find("Value").GetComponent<Text>();
             _value = MaxValue;
+
+            // initialize bar
+            UpdateBar();
         }
 
         /// <summary>
@@ -100,6 +100,23 @@ namespace CH.MapoTofu.UI
                 _value = 0;
             }
             UpdateBar();
+        }
+
+        /// <summary>
+        /// Sets the maximum value of the property.
+        /// </summary>
+        /// <param name="maxValue">Number to set maximum value to</param>
+        public void SetMaxValue(int maxValue)
+        {
+            _maxValue = maxValue;
+            if (_maxValue < 0)
+            {
+                _maxValue = 0;
+            }
+            if (_value > MaxValue)
+            {
+                _value = MaxValue;
+            }
         }
         #endregion
     }
