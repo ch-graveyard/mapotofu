@@ -385,6 +385,12 @@ MonoBehaviour:
     maxWater: 10
     maxTofu: 100000
     maxTime: 999
+    tofuDecreasePerBite: 1200
+    hpDecreasePerTofu: 0.07
+    timeSpicinessLasts: 3
+    timeSpicinessStarts: 2
+    hpRecoveryPerDrink: 1000
+    tofuNegationPerDrink: 100
   _state:
     currentHp: 0
     currentWater: 0

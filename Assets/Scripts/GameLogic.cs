@@ -56,6 +56,36 @@ namespace CH.MapoTofu
             // check if time is up
             if ((int)_state.time > _config.maxTime) TimeOver();
 
+            // check if we crossed a second
+            if ((int)(_state.time - Time.deltaTime) < (int)_state.time)
+            {
+                // calculate times from which to get tofu
+                int startTime = (int)_state.time - _config.timeSpicinessLasts;
+                int endTime = (int)_state.time - _config.timeSpicinessStarts;
+                if (startTime < 0) startTime = 0;
+                if (endTime < 0) endTime = 0;
+
+                // sum tofu eaten in window
+                int tofu = 0;
+                for (int i = startTime; i <= endTime; i++)
+                {
+                    tofu += _state.tofuEaten[i];
+                }
+
+                // reduce HP
+                _state.currentHp -= (int)(_config.hpDecreasePerTofu * tofu);
+            }
+
+            // check if HP or tofu is depleted
+            if (_state.currentHp <= 0)
+            {
+                GameOver();
+            }
+            if (_state.currentTofu <= 0)
+            {
+                Win();
+            }
+
             // update BarHandlers
             UpdateBars();
         }
@@ -67,9 +97,11 @@ namespace CH.MapoTofu
         /// </summary>
         public void EatButtonClicked()
         {
-            // reduce HP and tofu
-            _state.currentHp = Mathf.Max(_state.currentHp - 500, 0);
-            _state.currentTofu = Mathf.Max(_state.currentTofu - 800, 0);
+            // reduce tofu
+            _state.currentTofu -= _config.tofuDecreasePerBite;
+
+            // log tofu eaten
+            _state.tofuEaten[(int)_state.time] += _config.tofuDecreasePerBite;
         }
 
         /// <summary>
@@ -83,8 +115,12 @@ namespace CH.MapoTofu
                 // reduce water
                 _state.currentWater--;
 
-                // increase HP
-                _state.currentHp = Mathf.Min(_state.currentHp + 1000, _config.maxHp);
+                // recover HP
+                _state.currentHp += _config.hpRecoveryPerDrink;
+
+                // negate tofu
+                _state.tofuEaten[(int)_state.time] -=
+                    _config.tofuNegationPerDrink;
             }
         }
         #endregion
@@ -93,6 +129,24 @@ namespace CH.MapoTofu
         /// Handles time running out.
         /// </summary>
         private void TimeOver()
+        {
+            // reload scene for now
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        /// <summary>
+        /// Handles HP running out.
+        /// </summary>
+        private void GameOver()
+        {
+            // reload scene for now
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        /// <summary>
+        /// Handles tofu being finished.
+        /// </summary>
+        private void Win()
         {
             // reload scene for now
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
