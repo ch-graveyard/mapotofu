@@ -32,6 +32,13 @@ namespace CH.MapoTofu
         [SerializeField]
         private Text _timer;
 
+        /// <summary>
+        /// Object containing <see cref="Text"/> for displaying messages at
+        /// game end.
+        /// </summary>
+        [SerializeField]
+        private GameObject _gameEndText;
+
         [SerializeField]
         private GameConfig _config;
 
@@ -144,6 +151,7 @@ namespace CH.MapoTofu
         }
         #endregion
 
+        #region Game ending handlers
         /// <summary>
         /// Handles time running out.
         /// </summary>
@@ -152,8 +160,9 @@ namespace CH.MapoTofu
             // set game over so update loop does not run
             _gameOver = true;
 
-            // reload scene for now
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            // display game over
+            _gameEndText.SetActive(true);
+            _gameEndText.GetComponent<Text>().text = "Time Over";
         }
 
         /// <summary>
@@ -164,8 +173,9 @@ namespace CH.MapoTofu
             // set game over so update loop does not run
             _gameOver = true;
 
-            // reload scene for now
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            // display game over
+            _gameEndText.SetActive(true);
+            _gameEndText.GetComponent<Text>().text = "Game Over";
         }
 
         /// <summary>
@@ -176,9 +186,11 @@ namespace CH.MapoTofu
             // set game over so update loop does not run
             _gameOver = true;
 
-            // reload scene for now
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            // display game over
+            _gameEndText.SetActive(true);
+            _gameEndText.GetComponent<Text>().text = "Level Clear";
         }
+        #endregion
 
         /// <summary>
         /// Updates all <see cref="BarHandler"/>s with current values.
