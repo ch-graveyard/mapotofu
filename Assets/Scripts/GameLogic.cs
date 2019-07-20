@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace CH.MapoTofu
 {
@@ -13,22 +14,10 @@ namespace CH.MapoTofu
         private UI.BarHandler _hpBar;
 
         /// <summary>
-        /// Maximum HP.
-        /// </summary>
-        [SerializeField]
-        private int _maxHp;
-
-        /// <summary>
         /// <see cref="BarHandler"/> for water bar.
         /// </summary>
         [SerializeField]
         private UI.BarHandler _waterBar;
-
-        /// <summary>
-        /// Maximum water count.
-        /// </summary>
-        [SerializeField]
-        private int _maxWater;
 
         /// <summary>
         /// <see cref="BarHandler"/> for tofu bar.
@@ -36,31 +25,39 @@ namespace CH.MapoTofu
         [SerializeField]
         private UI.BarHandler _tofuBar;
 
-        /// <summary>
-        /// Maximum tofu value.
-        /// </summary>
         [SerializeField]
-        private int _maxTofu;
-        #endregion
+        private GameConfig _config;
 
-        #region Game state
-        private int _currentHp;
-        private int _currentWater;
-        private int _currentTofu;
+        [SerializeField]
+        private GameState _state;
         #endregion
 
         #region Monobehaviour methods
         void Awake()
         {
             // set maximum values for bars
-            _hpBar.SetMaxValue(_maxHp);
-            _waterBar.SetMaxValue(_maxWater);
-            _tofuBar.SetMaxValue(_maxTofu);
+            _hpBar.SetMaxValue(_config.maxHp);
+            _waterBar.SetMaxValue(_config.maxWater);
+            _tofuBar.SetMaxValue(_config.maxTofu);
 
             // set initial game state
-            _currentHp = _maxHp;
-            _currentWater = _maxWater;
-            _currentTofu = _maxTofu;
+            _state.currentHp = _config.maxHp;
+            _state.currentWater = _config.maxWater;
+            _state.currentTofu = _config.maxTofu;
+            _state.time = 0f;
+            _state.tofuEaten = new int[_config.maxTime];
+        }
+
+        void Update()
+        {
+            // increment time
+            _state.time += Time.deltaTime;
+
+            // check if time is up
+            if ((int)_state.time > _config.maxTime) TimeOver();
+
+            // update BarHandlers
+            UpdateBars();
         }
         #endregion
 
@@ -71,11 +68,8 @@ namespace CH.MapoTofu
         public void EatButtonClicked()
         {
             // reduce HP and tofu
-            _currentHp = Mathf.Max(_currentHp - 500, 0);
-            _currentTofu = Mathf.Max(_currentTofu - 800, 0);
-
-            // update BarHandlers
-            UpdateBars();
+            _state.currentHp = Mathf.Max(_state.currentHp - 500, 0);
+            _state.currentTofu = Mathf.Max(_state.currentTofu - 800, 0);
         }
 
         /// <summary>
@@ -84,28 +78,34 @@ namespace CH.MapoTofu
         public void DrinkButtonClicked()
         {
             // check if still have water
-            if (_currentWater > 0)
+            if (_state.currentWater > 0)
             {
                 // reduce water
-                _currentWater--;
+                _state.currentWater--;
 
                 // increase HP
-                _currentHp = Mathf.Min(_currentHp + 1000, _maxHp);
+                _state.currentHp = Mathf.Min(_state.currentHp + 1000, _config.maxHp);
             }
-
-            // update BarHandlers
-            UpdateBars();
         }
         #endregion
+
+        /// <summary>
+        /// Handles time running out.
+        /// </summary>
+        private void TimeOver()
+        {
+            // reload scene for now
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
 
         /// <summary>
         /// Updates all <see cref="BarHandler"/>s with current values.
         /// </summary>
         private void UpdateBars()
         {
-            _hpBar.SetValue(_currentHp);
-            _waterBar.SetValue(_currentWater);
-            _tofuBar.SetValue(_currentTofu);
+            _hpBar.SetValue(_state.currentHp);
+            _waterBar.SetValue(_state.currentWater);
+            _tofuBar.SetValue(_state.currentTofu);
         }
     }
 

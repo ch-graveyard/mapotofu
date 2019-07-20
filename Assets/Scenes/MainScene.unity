@@ -378,11 +378,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hpBar: {fileID: 607179373}
-  _maxHp: 13759
   _waterBar: {fileID: 331575824}
-  _maxWater: 10
   _tofuBar: {fileID: 1864037253}
-  _maxTofu: 33124
+  _config:
+    maxHp: 10000
+    maxWater: 10
+    maxTofu: 100000
+    maxTime: 999
+  _state:
+    currentHp: 0
+    currentWater: 0
+    currentTofu: 0
+    time: 0
+    tofuEaten: 
 --- !u!1001 &331575822
 Prefab:
   m_ObjectHideFlags: 0
