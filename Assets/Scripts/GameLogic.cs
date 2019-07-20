@@ -33,11 +33,11 @@ namespace CH.MapoTofu
         private Text _timer;
 
         /// <summary>
-        /// Object containing <see cref="Text"/> for displaying messages at
-        /// game end.
+        /// Object containing <see cref="Text"/> for displaying messages in the
+        /// middle of the screen.
         /// </summary>
         [SerializeField]
-        private GameObject _gameEndText;
+        private GameObject _middleText;
 
         [SerializeField]
         private GameConfig _config;
@@ -47,7 +47,12 @@ namespace CH.MapoTofu
         #endregion
 
         /// <summary>
-        /// True if game is over due to time / HP / tofu depleted.
+        /// True if game is paused.
+        /// </summary>
+        private bool _pause = false;
+
+        /// <summary>
+        /// True if game is over.
         /// </summary>
         private bool _gameOver = false;
 
@@ -69,15 +74,16 @@ namespace CH.MapoTofu
 
         void Update()
         {
-            // don't apply update loop if game is over
-            if (_gameOver)
+            // don't apply update loop if paused or game over
+            if (_pause || _gameOver)
                 return;
 
             // increment time
             _state.time += Time.deltaTime;
 
             // update timer
-            _timer.text = ((int)(_config.maxTime - _state.time)).ToString("0");
+            _timer.text = ((int)Mathf.Max(_config.maxTime - _state.time, 0f)).
+                ToString("0");
 
             // check if time is up
             if ((int)_state.time > _config.maxTime) TimeOver();
@@ -149,6 +155,22 @@ namespace CH.MapoTofu
                     _config.tofuNegationPerDrink;
             }
         }
+
+        /// <summary>
+        /// Handles pause button being clicked.
+        /// </summary>
+        public void PauseButtonClicked()
+        {
+            if (!_gameOver)
+            {
+                // pause / resume
+                _pause = !_pause;
+
+                // display pause text if necessary
+                _middleText.SetActive(_pause);
+                _middleText.GetComponent<Text>().text = "Game Paused";
+            }
+        }
         #endregion
 
         #region Game ending handlers
@@ -157,12 +179,12 @@ namespace CH.MapoTofu
         /// </summary>
         private void TimeOver()
         {
-            // set game over so update loop does not run
+            // set game to over
             _gameOver = true;
 
             // display game over
-            _gameEndText.SetActive(true);
-            _gameEndText.GetComponent<Text>().text = "Time Over";
+            _middleText.SetActive(true);
+            _middleText.GetComponent<Text>().text = "Time Over";
         }
 
         /// <summary>
@@ -170,12 +192,12 @@ namespace CH.MapoTofu
         /// </summary>
         private void GameOver()
         {
-            // set game over so update loop does not run
+            // set game to over
             _gameOver = true;
 
             // display game over
-            _gameEndText.SetActive(true);
-            _gameEndText.GetComponent<Text>().text = "Game Over";
+            _middleText.SetActive(true);
+            _middleText.GetComponent<Text>().text = "Game Over";
         }
 
         /// <summary>
@@ -183,12 +205,12 @@ namespace CH.MapoTofu
         /// </summary>
         private void Win()
         {
-            // set game over so update loop does not run
+            // set game to over
             _gameOver = true;
 
             // display game over
-            _gameEndText.SetActive(true);
-            _gameEndText.GetComponent<Text>().text = "Level Clear";
+            _middleText.SetActive(true);
+            _middleText.GetComponent<Text>().text = "Level Clear";
         }
         #endregion
 
