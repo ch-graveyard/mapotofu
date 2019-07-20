@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace CH.MapoTofu
 {
@@ -25,12 +26,23 @@ namespace CH.MapoTofu
         [SerializeField]
         private UI.BarHandler _tofuBar;
 
+        /// <summary>
+        /// <see cref="Text"/> representing time remaining.
+        /// </summary>
+        [SerializeField]
+        private Text _timer;
+
         [SerializeField]
         private GameConfig _config;
 
         [SerializeField]
         private GameState _state;
         #endregion
+
+        /// <summary>
+        /// True if game is over due to time / HP / tofu depleted.
+        /// </summary>
+        private bool _gameOver = false;
 
         #region Monobehaviour methods
         void Awake()
@@ -50,8 +62,15 @@ namespace CH.MapoTofu
 
         void Update()
         {
+            // don't apply update loop if game is over
+            if (_gameOver)
+                return;
+
             // increment time
             _state.time += Time.deltaTime;
+
+            // update timer
+            _timer.text = ((int)(_config.maxTime - _state.time)).ToString("0");
 
             // check if time is up
             if ((int)_state.time > _config.maxTime) TimeOver();
@@ -130,6 +149,9 @@ namespace CH.MapoTofu
         /// </summary>
         private void TimeOver()
         {
+            // set game over so update loop does not run
+            _gameOver = true;
+
             // reload scene for now
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
@@ -139,6 +161,9 @@ namespace CH.MapoTofu
         /// </summary>
         private void GameOver()
         {
+            // set game over so update loop does not run
+            _gameOver = true;
+
             // reload scene for now
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
@@ -148,6 +173,9 @@ namespace CH.MapoTofu
         /// </summary>
         private void Win()
         {
+            // set game over so update loop does not run
+            _gameOver = true;
+
             // reload scene for now
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
