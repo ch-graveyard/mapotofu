@@ -46,6 +46,13 @@ namespace CH.MapoTofu
         [SerializeField]
         private Image _pauseButtonImage;
 
+        /// <summary>
+        /// <see cref="Button"/>-containing object that contains the exit
+        /// button.
+        /// </summary>
+        [SerializeField]
+        private GameObject _exitButton;
+
         [SerializeField]
         private GameConfig _config;
 
@@ -179,9 +186,21 @@ namespace CH.MapoTofu
                 _middleText.SetActive(_pause);
                 _middleText.GetComponent<Text>().text = "Game Paused";
 
+                // display exit button if necessary
+                _exitButton.SetActive(true);
+
                 // make pause button nonvisible to reveal play button if paused
                 _pauseButtonImage.color = _pause ? Color.clear : Color.white;
             }
+        }
+
+        /// <summary>
+        /// Handles exit button being clicked.
+        /// </summary>
+        public void ExitButtonClicked()
+        {
+            // return to menu
+            SceneManager.LoadScene("MainMenu");
         }
         #endregion
 
