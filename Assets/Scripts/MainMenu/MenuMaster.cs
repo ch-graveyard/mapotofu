@@ -21,7 +21,7 @@ namespace CH.MapoTofu.UI
         /// </summary>
         public void CustomButtonClicked()
         {
-            throw new NotImplementedException();
+            SceneManager.LoadScene("CustomMenu");
         }
 
         /// <summary>

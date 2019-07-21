@@ -216,6 +216,9 @@ namespace CH.MapoTofu
             // display game over
             _middleText.SetActive(true);
             _middleText.GetComponent<Text>().text = "Time Over";
+
+            // enable exit button
+            _exitButton.SetActive(true);
         }
 
         /// <summary>
@@ -229,6 +232,9 @@ namespace CH.MapoTofu
             // display game over
             _middleText.SetActive(true);
             _middleText.GetComponent<Text>().text = "Game Over";
+
+            // enable exit button
+            _exitButton.SetActive(true);
         }
 
         /// <summary>
@@ -242,6 +248,9 @@ namespace CH.MapoTofu
             // display game over
             _middleText.SetActive(true);
             _middleText.GetComponent<Text>().text = "Level Clear";
+
+            // enable exit button
+            _exitButton.SetActive(true);
         }
         #endregion
 
