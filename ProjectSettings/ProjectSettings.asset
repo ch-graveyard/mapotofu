@@ -163,7 +163,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.gmail.chuahou.mapotofu
+    Android: dev.chuahou.mapotofu
     Standalone: com.Company.ProductName
   buildNumber: {}
   AndroidBundleVersionCode: 1
