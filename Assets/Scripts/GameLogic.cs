@@ -105,7 +105,9 @@ namespace CH.MapoTofu
                 }
 
                 // reduce HP
-                _state.currentHp -= (int)(_config.hpDecreasePerTofu * tofu);
+                _state.currentHp -=
+                    (int)(Mathf.Min(_config.hpDecreasePerTofu * tofu,
+                                    _config.maxHpDecreasePerSecond));
             }
 
             // check if HP or tofu is depleted

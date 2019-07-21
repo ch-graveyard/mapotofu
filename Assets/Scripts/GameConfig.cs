@@ -58,6 +58,11 @@ namespace CH.MapoTofu
         /// Amount of tofu to negate in the same second as the drink.
         /// </summary>
         public int tofuNegationPerDrink;
+
+        /// <summary>
+        /// Maximum HP decrease per second.
+        /// </summary>
+        public int maxHpDecreasePerSecond;
     }
 
 }

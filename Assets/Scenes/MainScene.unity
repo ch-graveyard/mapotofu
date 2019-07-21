@@ -393,6 +393,7 @@ MonoBehaviour:
     timeSpicinessStarts: 2
     hpRecoveryPerDrink: 1000
     tofuNegationPerDrink: 100
+    maxHpDecreasePerSecond: 2500
   _state:
     currentHp: 0
     currentWater: 0
