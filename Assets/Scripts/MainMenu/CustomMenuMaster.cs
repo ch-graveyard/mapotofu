@@ -123,6 +123,15 @@ namespace CH.MapoTofu.UI
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Handles exit button being clicked.
+        /// </summary>
+        public void ExitButtonClicked()
+        {
+            // return to menu
+            SceneManager.LoadScene("MainMenu");
+        }
+
         // input field listeners
 
         private void MaxHpListener(InputField field)
