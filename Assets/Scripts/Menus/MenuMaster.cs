@@ -35,7 +35,7 @@ namespace CH.MapoTofu.UI
         /// </summary>
         public void AboutButtonClicked()
         {
-            throw new NotImplementedException();
+            SceneManager.LoadScene("About");
         }
 
     }

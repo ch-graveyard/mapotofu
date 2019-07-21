@@ -199,15 +199,6 @@ namespace CH.MapoTofu
                 _pauseButtonImage.color = _pause ? Color.clear : Color.white;
             }
         }
-
-        /// <summary>
-        /// Handles exit button being clicked.
-        /// </summary>
-        public void ExitButtonClicked()
-        {
-            // return to menu
-            SceneManager.LoadScene("MainMenu");
-        }
         #endregion
 
         #region Game ending handlers
