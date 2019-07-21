@@ -73,6 +73,12 @@ namespace CH.MapoTofu
         #region Monobehaviour methods
         void Awake()
         {
+            // load custom config if necessary
+            if (ConfigCarrier.isCustomGame)
+            {
+                _config = ConfigCarrier.Config;
+            }
+
             // set maximum values for bars
             _hpBar.SetMaxValue(_config.maxHp);
             _waterBar.SetMaxValue(_config.maxWater);

@@ -8,6 +8,12 @@ namespace CH.MapoTofu.UI
     public class MenuMaster : MonoBehaviour
     {
 
+        void Awake()
+        {
+            // reset custom game options
+            ConfigCarrier.isCustomGame = false;
+        }
+
         /// <summary>
         /// Handles play button clicked.
         /// </summary>

@@ -31,6 +31,10 @@ namespace CH.MapoTofu.UI
 
         void Awake()
         {
+            // get previous config as default config
+            if (ConfigCarrier.configSet)
+                _defaultConfig = ConfigCarrier.Config;
+
             // set all input field placeholders
             SetPlaceholder(_maxHpOption, "Maximum HP", _defaultConfig.maxHp);
             SetPlaceholder(_maxWaterOption, "Maximum Water",
@@ -120,7 +124,13 @@ namespace CH.MapoTofu.UI
         /// </summary>
         public void BeginButtonClicked()
         {
-            throw new NotImplementedException();
+            // set cross-scene information
+            ConfigCarrier.Config = _config;
+            ConfigCarrier.isCustomGame = true;
+            ConfigCarrier.configSet = true;
+
+            // load scene
+            SceneManager.LoadScene("MainScene");
         }
 
         /// <summary>
