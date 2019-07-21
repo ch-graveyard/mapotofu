@@ -39,6 +39,13 @@ namespace CH.MapoTofu
         [SerializeField]
         private GameObject _middleText;
 
+        /// <summary>
+        /// Pause button <see cref="Image"/> to make transparent to reveal play
+        /// button when paused.
+        /// </summary>
+        [SerializeField]
+        private Image _pauseButtonImage;
+
         [SerializeField]
         private GameConfig _config;
 
@@ -171,6 +178,9 @@ namespace CH.MapoTofu
                 // display pause text if necessary
                 _middleText.SetActive(_pause);
                 _middleText.GetComponent<Text>().text = "Game Paused";
+
+                // make pause button nonvisible to reveal play button if paused
+                _pauseButtonImage.color = _pause ? Color.clear : Color.white;
             }
         }
         #endregion
