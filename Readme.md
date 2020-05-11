@@ -1,3 +1,5 @@
+**NOTICE**: This project is no longer maintained / in development.
+
 # Mapo Tofu mobile game
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-grammas-recipe.svg)](https://forthebadge.com)
